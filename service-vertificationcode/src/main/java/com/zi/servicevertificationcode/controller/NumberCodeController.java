@@ -11,7 +11,7 @@ public class NumberCodeController {
 
     @GetMapping("/numberCode/{size}")
     public ResponseResult numberCode(@PathVariable("size") int size){
-        System.out.println("size= " + size);
+//        System.out.println("size= " + size);
 
 
         //随机生成验证码
