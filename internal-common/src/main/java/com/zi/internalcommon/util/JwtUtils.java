@@ -5,6 +5,8 @@ import com.auth0.jwt.JWTCreator;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.zi.internalcommon.dto.TokenResult;
+import jdk.nashorn.internal.parser.Token;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -15,12 +17,15 @@ public class JwtUtils {
 
     private static final String SIGN = "fao%208*@#)*";
 
-    private static final String JWT_KEY = "passengerPhone";
+    private static final String JWT_KEY_PHONE = "phone";
+
+    private static final String JWT_IDENTITY_KEY = "identity";
 
     //生成token
-    public static String generatorToken(String passengerPhone){
+    public static String generatorToken(String phone, String identity){
         Map<String, String> map = new HashMap<>();
-        map.put(JWT_KEY, passengerPhone);
+        map.put(JWT_KEY_PHONE, phone);
+        map.put(JWT_IDENTITY_KEY, identity);
         //token的过期时间
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DATE, 1);
@@ -42,17 +47,24 @@ public class JwtUtils {
     }
 
     //解析token
-    public static String parseToken(String token){
+    public static TokenResult parseToken(String token){
         DecodedJWT verify = JWT.require(Algorithm.HMAC256(SIGN)).build().verify(token);
-        Claim claim = verify.getClaim(JWT_KEY);
-        return claim.toString();
+        String phone = verify.getClaim("phone").toString();
+        String identity = verify.getClaim("identity").toString();
+        TokenResult tokenResult = new TokenResult();
+        tokenResult.setPhone(phone);
+        tokenResult.setIdentity(identity);
+        return tokenResult;
     }
 
     //测试
     public static void main(String[] args) {
-        String s = generatorToken("17372804728");
+        String s = generatorToken("17372804728", "1");
         System.out.println("生成的token：" + s);
 
-        System.out.println("解析后的token：" + parseToken(s));
+        TokenResult tokenResult = parseToken(s);
+        System.out.println("解析后的phone：" + tokenResult.getPhone());
+        System.out.println("解析后的identity：" + tokenResult.getIdentity());
+
     }
 }

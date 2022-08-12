@@ -3,10 +3,12 @@ package com.zi.apipassenger.service;
 import com.zi.apipassenger.remote.ServicePassengerUserClient;
 import com.zi.apipassenger.remote.ServiceVertificationCodeClient;
 import com.zi.internalcommon.constant.CommonStatusEnum;
+import com.zi.internalcommon.constant.IdentityConstant;
 import com.zi.internalcommon.dto.ResponseResult;
 import com.zi.internalcommon.request.VertificationCodeDTO;
 import com.zi.internalcommon.response.NumberCodeResponse;
 import com.zi.internalcommon.response.TokenResponse;
+import com.zi.internalcommon.util.JwtUtils;
 import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,6 +91,7 @@ public class VertificationCodeService {
 
         //颁发令牌
         System.out.println("颁发令牌");
+        JwtUtils.generatorToken(passengerPhone, IdentityConstant.PASSENGER_IDENTITY);
 
         TokenResponse tokenResponse = new TokenResponse();
         tokenResponse.setToken("token value");
