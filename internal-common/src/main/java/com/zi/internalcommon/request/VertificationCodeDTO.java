@@ -1,4 +1,4 @@
-package com.zi.apipassenger.request;
+package com.zi.internalcommon.request;
 
 import lombok.Data;
 

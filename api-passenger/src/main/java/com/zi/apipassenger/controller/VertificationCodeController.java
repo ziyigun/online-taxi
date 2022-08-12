@@ -1,11 +1,8 @@
 package com.zi.apipassenger.controller;
 
-import com.zi.apipassenger.request.VertificationCodeDTO;
 import com.zi.apipassenger.service.VertificationCodeService;
 import com.zi.internalcommon.dto.ResponseResult;
-import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
