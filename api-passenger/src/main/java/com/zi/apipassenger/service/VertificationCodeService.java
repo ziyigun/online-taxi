@@ -1,8 +1,10 @@
 package com.zi.apipassenger.service;
 
+import com.zi.apipassenger.remote.ServicePassengerUserClient;
 import com.zi.apipassenger.remote.ServiceVertificationCodeClient;
 import com.zi.internalcommon.constant.CommonStatusEnum;
 import com.zi.internalcommon.dto.ResponseResult;
+import com.zi.internalcommon.request.VertificationCodeDTO;
 import com.zi.internalcommon.response.NumberCodeResponse;
 import com.zi.internalcommon.response.TokenResponse;
 import net.sf.json.JSONObject;
@@ -52,6 +54,10 @@ public class VertificationCodeService {
     private String generateKey(String passengerPhone){
         return vertificationCodePrefix + passengerPhone;
     }
+
+
+    @Autowired
+    private ServicePassengerUserClient servicePassengerUserClient;
     /**
      * 校验验证码
      * @param passengerPhone
@@ -77,7 +83,9 @@ public class VertificationCodeService {
 
 
         //判断原来是否有用户，并进项相应的处理
-        System.out.println("判断原来是否有用户，并进行相应的处理");
+        VertificationCodeDTO vertificationCodeDTO = new VertificationCodeDTO();
+        vertificationCodeDTO.setPassengerPhone(passengerPhone);
+        servicePassengerUserClient.loginOrRegister(vertificationCodeDTO);
 
         //颁发令牌
         System.out.println("颁发令牌");

@@ -2,6 +2,7 @@ package com.zi.apipassenger.controller;
 
 import com.zi.apipassenger.service.VertificationCodeService;
 import com.zi.internalcommon.dto.ResponseResult;
+import com.zi.internalcommon.request.VertificationCodeDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
