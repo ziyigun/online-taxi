@@ -3,15 +3,16 @@ package com.zi.servicepassengeruser.dto;
 import lombok.Data;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 @Data
 public class PassengerUser {
 
     private long id;
 
-    private Date gmtCreate;
+    private LocalDateTime gmtCreate;
 
-    private Date gmtModified;
+    private LocalDateTime gmtModified;
 
     private String passengerPhone;
 
