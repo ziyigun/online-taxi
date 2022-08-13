@@ -49,8 +49,8 @@ public class JwtUtils {
     //解析token
     public static TokenResult parseToken(String token){
         DecodedJWT verify = JWT.require(Algorithm.HMAC256(SIGN)).build().verify(token);
-        String phone = verify.getClaim("phone").toString();
-        String identity = verify.getClaim("identity").toString();
+        String phone = verify.getClaim("phone").asString();//注意：此处是asString,使用toString会多引号
+        String identity = verify.getClaim("identity").asString();
         TokenResult tokenResult = new TokenResult();
         tokenResult.setPhone(phone);
         tokenResult.setIdentity(identity);
