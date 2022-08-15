@@ -1,6 +1,6 @@
 package com.zi.internalcommon.constant;
 
-public class IdentityConstant {
+public class IdentityConstants {
 
     //乘客
     public static final String PASSENGER_IDENTITY = "1";

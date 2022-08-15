@@ -3,6 +3,7 @@ package com.zi.apipassenger.interceptor;
 import com.auth0.jwt.exceptions.AlgorithmMismatchException;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
+import com.zi.internalcommon.constant.TokenConstants;
 import com.zi.internalcommon.dto.ResponseResult;
 import com.zi.internalcommon.dto.TokenResult;
 import com.zi.internalcommon.util.JwtUtils;
@@ -54,7 +55,7 @@ public class JwtInterceptor implements HandlerInterceptor {
             //拼接key
             String phone = tokenResult.getPhone();
             String identity = tokenResult.getIdentity();
-            String tokenKey = RedisPrefixUtils.generateToken(phone, identity);
+            String tokenKey = RedisPrefixUtils.generateToken(phone, identity, TokenConstants.ACCESS_TOKEN_TYPE);
             //从redis中获取token
             String tokenRedis = stringRedisTemplate.opsForValue().get(tokenKey);
             if(StringUtils.isBlank(tokenRedis)){
