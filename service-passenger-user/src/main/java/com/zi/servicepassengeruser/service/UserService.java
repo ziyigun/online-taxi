@@ -1,13 +1,10 @@
 package com.zi.servicepassengeruser.service;
 
 import com.zi.internalcommon.dto.ResponseResult;
-import com.zi.servicepassengeruser.dto.PassengerUser;
 import com.zi.servicepassengeruser.mapper.PassengerUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
