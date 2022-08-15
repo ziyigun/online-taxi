@@ -92,12 +92,14 @@ public class VertificationCodeService {
         String refreshToken = JwtUtils.generatorToken(passengerPhone, IdentityConstants.PASSENGER_IDENTITY, TokenConstants.REFRESH_TOKEN_TYPE);
 
         //将accessToken存入redis
-        String accessTokenKey = RedisPrefixUtils.generateToken(passengerPhone, IdentityConstants.PASSENGER_IDENTITY, TokenConstants.ACCESS_TOKEN_TYPE);
+        String accessTokenKey = RedisPrefixUtils.generateTokenKey(passengerPhone, IdentityConstants.PASSENGER_IDENTITY, TokenConstants.ACCESS_TOKEN_TYPE);
         stringRedisTemplate.opsForValue().set(accessTokenKey, accessToken, 30, TimeUnit.DAYS);
+//        stringRedisTemplate.opsForValue().set(accessTokenKey, accessToken, 10, TimeUnit.SECONDS);
 
         //将refreshToken存入redis
-        String refreshTokenKey = RedisPrefixUtils.generateToken(passengerPhone, IdentityConstants.PASSENGER_IDENTITY, TokenConstants.REFRESH_TOKEN_TYPE);
+        String refreshTokenKey = RedisPrefixUtils.generateTokenKey(passengerPhone, IdentityConstants.PASSENGER_IDENTITY, TokenConstants.REFRESH_TOKEN_TYPE);
         stringRedisTemplate.opsForValue().set(refreshTokenKey, refreshToken, 31, TimeUnit.DAYS);
+//        stringRedisTemplate.opsForValue().set(refreshTokenKey, refreshToken, 50, TimeUnit.SECONDS);
 
 
         TokenResponse tokenResponse = new TokenResponse();

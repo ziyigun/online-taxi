@@ -6,6 +6,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.zi.internalcommon.dto.TokenResult;
+import com.zi.internalcommon.response.TokenResponse;
 import jdk.nashorn.internal.parser.Token;
 
 import java.util.Calendar;
@@ -24,16 +25,17 @@ public class JwtUtils {
 
     private static final String TOKEN_TYPE = "tokenType";
 
+    private static final String JWT_TOKEN_TIME = "tokenTime";
+
     //生成token
     public static String generatorToken(String phone, String identity, String tokenType){
         Map<String, String> map = new HashMap<>();
         map.put(JWT_KEY_PHONE, phone);
         map.put(JWT_IDENTITY_KEY, identity);
         map.put(TOKEN_TYPE, tokenType);
-        //token的过期时间
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DATE, 1);
-        Date date = calendar.getTime();
+
+        //为了使得每次生成的token不一样
+        map.put(JWT_TOKEN_TIME, Calendar.getInstance().getTime().toString());
 
         JWTCreator.Builder builder = JWT.create();
         //整合map
@@ -58,6 +60,22 @@ public class JwtUtils {
         TokenResult tokenResult = new TokenResult();
         tokenResult.setPhone(phone);
         tokenResult.setIdentity(identity);
+        return tokenResult;
+    }
+
+
+    /**
+     * 校验token，主要判断token是否异常
+     * @param token
+     * @return
+     */
+    public static TokenResult checkToken(String token){
+        TokenResult tokenResult = null;
+        try{
+            tokenResult = JwtUtils.parseToken(token);
+        } catch (Exception e){
+
+        }
         return tokenResult;
     }
 
