@@ -1,2 +1,4 @@
 server:
   port: 8085
+amp:
+  key: "e3fbc0da5dca2eda3799544233e92d93"
