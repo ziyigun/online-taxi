@@ -23,10 +23,7 @@ public class DirectionService {
     public ResponseResult driving(String depLongitude, String depLatitude, String destLongitude, String destLatitude){
 
         //调用第三方地图接口
-        mapDirectionClient.direction(depLongitude, depLatitude, destLongitude, destLatitude);
-        DirectionResponse directionResponse = new DirectionResponse();
-        directionResponse.setDistance(132);
-        directionResponse.setDuration(21);
+        DirectionResponse directionResponse = mapDirectionClient.direction(depLongitude, depLatitude, destLongitude, destLatitude);
         return ResponseResult.success(directionResponse);
     }
 }
